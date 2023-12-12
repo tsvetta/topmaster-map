@@ -69,7 +69,8 @@ export const LeafletMap = ({ onWaypointsSet }: { onWaypointsSet: any }) => {
     <MapContainer center={[41.71525, 44.87479]} zoom={13}>
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+        // url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+        url='https://tile-{s}.openstreetmap.fr/hot/{z}/{x}/{y}.png'
       />
 
       <MapEventListener onMapClick={onMapClick} />
