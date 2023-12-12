@@ -1,22 +1,27 @@
 import { useState } from 'react';
+import { LatLng } from 'leaflet';
 
 import LeafletMap from './LeafletMap/LeafletMap';
 
 import './App.css';
 
 function App() {
-  // const [latlng, setLatlng] = useState({ lat: 0, lng: 0 });
-  // const onMarkerClick = (e: any) => {
-  //   console.log(e.latlng);
-  //   setLatlng(e.latlng);
-  // };
+  const [waypoints, setWaypoints] = useState<LatLng[]>([]);
 
   return (
-    <>
-      <h1 className='text-3xl font-bold'>Topmaster Tbilisi Map</h1>
-      <p>{/* {latlng.lat} {latlng.lng} */}</p>
-      <LeafletMap />
-    </>
+    <div className='page'>
+      <h1 className='page-title'>Topmaster Tbilisi Map</h1>
+      <div className='map-container'>
+        <div className='map-sidebar'>
+          {waypoints.map((wp) => (
+            <p>
+              {wp.lat.toFixed(4)} -- {wp.lng.toFixed(4)}
+            </p>
+          ))}
+        </div>
+        <LeafletMap getWaypoints={setWaypoints} />
+      </div>
+    </div>
   );
 }
 

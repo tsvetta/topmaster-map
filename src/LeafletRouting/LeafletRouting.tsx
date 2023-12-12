@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import L, { latLngBounds } from 'leaflet';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import 'leaflet-routing-machine';
-import { useMap, useMapEvents } from 'react-leaflet';
+import { useMap } from 'react-leaflet';
 
 L.Marker.prototype.options.icon = L.icon({
   iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
@@ -11,16 +11,6 @@ L.Marker.prototype.options.icon = L.icon({
 
 const LeafletRouting = ({ waypoints, color, bounds }: any) => {
   const map = useMap();
-
-  // useMapEvents({
-  //   click(e: any) {
-  //     console.log('map click', e.latlng);
-  //     // onMapClick(e.latlng);
-  //     // setPosition(e.latlng);
-  //     // map.flyTo(e.latlng, map.getZoom());
-  //     // onMapClick(e);
-  //   },
-  // });
 
   let markerBounds = latLngBounds([]);
 
