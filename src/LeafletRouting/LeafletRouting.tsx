@@ -3,44 +3,61 @@ import { useEffect } from 'react';
 import L, { latLngBounds } from 'leaflet';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import 'leaflet-routing-machine';
-import { useMap } from 'react-leaflet';
+import { useMap, useMapEvents } from 'react-leaflet';
 
 L.Marker.prototype.options.icon = L.icon({
   iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
 });
 
-const LeafletRouting = ({ eachPoint, dataSource, color, bounds }: any) => {
+const LeafletRouting = ({ waypoints, color, bounds }: any) => {
   const map = useMap();
+
+  // useMapEvents({
+  //   click(e: any) {
+  //     console.log('map click', e.latlng);
+  //     // onMapClick(e.latlng);
+  //     // setPosition(e.latlng);
+  //     // map.flyTo(e.latlng, map.getZoom());
+  //     // onMapClick(e);
+  //   },
+  // });
+
   let markerBounds = latLngBounds([]);
-  useEffect(() => {
+
+  useEffect((): any => {
     if (!map) return;
 
     const routingControl = L.Routing.control({
-      waypoints: eachPoint,
+      router: L.Routing.osrmv1({
+        profile: 'walk',
+      }),
+      waypoints: waypoints,
       lineOptions: {
         styles: [
           {
-            color: color,
-            opacity: 1,
-            weight: 7,
+            color,
+            opacity: 0.7,
+            weight: 5,
           },
         ],
       },
 
-      addWaypoints: false,
-      draggableWaypoints: false,
+      addWaypoints: true,
+      draggableWaypoints: true,
       fitSelectedRoutes: false,
       showAlternatives: true,
     }).addTo(map);
+
     if (bounds.length && bounds.length > 0) {
-      bounds.forEach((marker) => {
+      bounds.forEach((marker: any) => {
         markerBounds.extend([marker.latitude, marker.longitude]);
       });
+
       map.fitBounds(markerBounds);
     }
 
     return () => map.removeControl(routingControl);
-  }, [map, eachPoint, bounds, color]);
+  }, [map, waypoints, bounds, color]);
 
   return null;
 };
