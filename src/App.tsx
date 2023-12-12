@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { LatLng } from 'leaflet';
 
-import LeafletMap from './LeafletMap/LeafletMap';
+import { LeafletMap } from './LeafletMap/LeafletMap';
 
 import './App.css';
 
@@ -19,7 +19,7 @@ function App() {
             </p>
           ))}
         </div>
-        <LeafletMap getWaypoints={setWaypoints} />
+        <LeafletMap onWaypointsSet={setWaypoints} />
       </div>
     </div>
   );

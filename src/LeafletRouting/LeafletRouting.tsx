@@ -17,7 +17,9 @@ const LeafletRouting = ({ waypoints, color, bounds }: any) => {
   useEffect((): any => {
     if (!map) return;
 
+    //@ts-ignore
     const routingControl = L.Routing.control({
+      //@ts-ignore
       router: L.Routing.osrmv1({
         profile: 'walk',
       }),

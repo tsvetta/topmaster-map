@@ -28,7 +28,7 @@ export type MapData = {
   data: MapPoint[];
 }[];
 
-const centerMapDataCalculate = (markersPoints: MapPoint[][]) => {
+export const centerMapDataCalculate = (markersPoints: MapPoint[][]) => {
   let points: MapPoint[] = [];
 
   markersPoints.forEach((marker: MapPoint[]) => {
@@ -39,18 +39,23 @@ const centerMapDataCalculate = (markersPoints: MapPoint[][]) => {
   return points;
 };
 
-function LeafletMap({ getWaypoints }: { getWaypoints: any }) {
-  const routeWayColor = FakeMapData.map((item) => item.color);
-  const initialWaypoints = FakeMapData.map((waypoints) =>
+export const getInitialWaypoints = (initialData: MapData): LatLng[][] =>
+  initialData.map((waypoints) =>
     waypoints.data.map((point) => L.latLng(point.latitude, point.longitude))
   );
 
-  const markersLatLon: MapPoint[][] = FakeMapData.map((waypoints) =>
+export const getMarkersLatLon = (initialData: MapData): MapPoint[][] =>
+  initialData.map((waypoints) =>
     waypoints.data.map((point) => ({
       latitude: point.latitude,
       longitude: point.longitude,
     }))
   );
+
+export const LeafletMap = ({ onWaypointsSet }: { onWaypointsSet: any }) => {
+  const routeWayColor = FakeMapData.map((item) => item.color);
+  const initialWaypoints = getInitialWaypoints(FakeMapData);
+  const markersLatLon = getMarkersLatLon(FakeMapData);
 
   const [waypoints, setWaypoints] = useState(initialWaypoints[0]);
   const onMapClick = (latlng: LatLng) => {
@@ -58,7 +63,7 @@ function LeafletMap({ getWaypoints }: { getWaypoints: any }) {
     setWaypoints(newWaypoints);
   };
 
-  getWaypoints(waypoints);
+  onWaypointsSet(waypoints);
 
   return (
     <MapContainer center={[41.71525, 44.87479]} zoom={13}>
@@ -76,6 +81,4 @@ function LeafletMap({ getWaypoints }: { getWaypoints: any }) {
       />
     </MapContainer>
   );
-}
-
-export default LeafletMap;
+};
