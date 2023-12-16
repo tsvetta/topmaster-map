@@ -1,3 +1,9 @@
+:root {
+    --mapbox-strange-margin: 15px;
+    --sidebar-width: 350px;
+    --title-height: 100px;
+}
+
 .page {
     display: flex;
     flex-direction: column;
@@ -6,7 +12,7 @@
 .page-title {
     font-size: 40px;
     padding: 20px;
-    height: 100px;
+    height: var(--title-height);
 }
 
 .map-container {
@@ -14,11 +20,12 @@
 }
 
 .map-sidebar {
-    width: 20%;
+    width: var(--sidebar-width);
     padding: 20px 25px;
 }
 
-.leaflet-container {
-    height: calc(100vh - 100px);
-    width: 80%;
+.leaflet-container,
+.mapbox-container {
+    height: calc(100vh - var(--title-height));
+    width: calc(100% - var(--sidebar-width) - var(--mapbox-strange-margin));
 }

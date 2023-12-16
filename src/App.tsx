@@ -2,7 +2,9 @@ import { useState } from 'react';
 import { LatLng } from 'leaflet';
 
 import { LeafletMap } from './LeafletMap/LeafletMap';
+import { MapboxMap } from './MapboxMap/MapboxMap';
 
+import './index.css';
 import './App.css';
 
 function App() {
@@ -13,13 +15,15 @@ function App() {
       <h1 className='page-title'>Topmaster Tbilisi Map</h1>
       <div className='map-container'>
         <div className='map-sidebar'>
+          <p>text</p>
           {waypoints.map((wp) => (
             <p>
               {wp.lat.toFixed(4)} -- {wp.lng.toFixed(4)}
             </p>
           ))}
         </div>
-        <LeafletMap onWaypointsSet={setWaypoints} />
+        <MapboxMap />
+        {/* <LeafletMap onWaypointsSet={setWaypoints} /> */}
       </div>
     </div>
   );

@@ -15,6 +15,8 @@
     "@testing-library/react": "^14.1.2",
     "@types/jest": "^29.5.11",
     "@types/leaflet": "^1.9.8",
+    "@types/mapbox__mapbox-gl-geocoder": "^4.7.7",
+    "@types/mapbox-gl": "^2.7.19",
     "@types/node": "^20.10.4",
     "@types/react": "^18.2.42",
     "@types/react-dom": "^18.2.17",
@@ -33,11 +35,14 @@
     "vite": "^5.0.7"
   },
   "dependencies": {
+    "@mapbox/mapbox-gl-geocoder": "^5.0.2",
     "leaflet": "^1.9.4",
     "leaflet-control-geocoder": "^2.4.0",
     "leaflet-routing-machine": "^3.2.12",
+    "mapbox-gl": "^3.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-leaflet": "^4.2.1"
+    "react-leaflet": "^4.2.1",
+    "react-map-gl": "^7.1.6"
   }
 }
